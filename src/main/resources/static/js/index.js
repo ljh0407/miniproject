@@ -3,34 +3,34 @@ let stno = 1; // 매장 번호
 
 // 1.매장 등록
 function store(){
+    alert('버튼')
     let data = { stname : document.querySelector(".stname").value }
+    console.log('ㅇㅇㅇㅇㅇㅇㅇ'+data)
     $.ajax({
-        url : "" ,
+        url : "/store/setstore" ,
         type : "post",
         data : JSON.stringify(data),
         contentType : "application/json",
         success : function(re) {
             if( re == true){
-                alert('매장등록성공');
+                alert('매장등록 성공');
                 location.reload();  //새로고침
             }
-            else{ alert('매장등록실패')}
+            else{ alert('매장등록 실패')}
         }
     })
 }
 
 // 2. 모든 매장 출력
-storelist()
+storelist();
 function storelist(){
 
     $.ajax({
-        url : "" ,
+        url : "/store/getstore" ,
         type : "get" ,
         success : function(re){
-        console.log('222')
-            let html = "";
+            let html = "<tr><th></th></tr>";
             re.forEach( c =>{
-                console.log( c )
                 html += '<button type="button" onclick="bcnochage('+c.stno+')">'+c.stname+'</button>';
             })
             document.querySelector('.storebox').innerHTML = html;
@@ -45,15 +45,13 @@ function bcnochage( cno ){ stno = cno; alert( stno+'번 매장선택' );  }
 
  //4. 제품등록
 function sale(){
-
     let data = {
-        sname : document.querySelector('.sname').value ,
+        sname : document.querySelector('.sname').value,
         sprice : document.querySelector('.sprice').value,
-        stno : stno
     }
-
+    console.log(data)
     $.ajax({  // http 사용하는 jquery 비동기통신 함수 [ 기본값 contentType : text/html ]
-        url : "",
+        url : "/sale/setsale",
         type : "post",
         data : JSON.stringify(data) ,
         contentType : "application/json",
@@ -71,28 +69,28 @@ function sale(){
 }
 
 //5. 제품 출력
-salelist();
+salelist()
 function salelist(){
-
     $.ajax({
-        url : "",
+        url : "/sale/getsale",
         type : "get",
-        data : { "stno" : stno },   // bcno : 카테고리번호
         success : function(list) {
             let html = '<tr>  <th> 번호 </th> <th> 이름 </th> <th> 가격 </th></tr>';
+            console.log(list)
             list.forEach( (b) => {
                 html +=
-                '<tr>  <td> '+b.stno+' </td> <td onclick="getview('+b.stno+')">'+b.sname+' </td> <td> '+b.sprice+' </td></tr>';
+                '<tr>  <td> '+b.sno+' </td> <td>'+b.sname+' </td> <td> '+b.sprice+' </td></tr>';
             })
             document.querySelector(".saletable").innerHTML = html;
+
         }
     })
 }
-
-// 6. 페이징
-function getview( stno ){
-    // 1. 클릭한 게시물번호 저장
-    sessionStorage.setItem("stno", stno );
-    // 2. 페이지 전환
-    location.href="";
-}
+//
+// // 6. 페이징
+// function getview( stno ){
+//     // 1. 클릭한 게시물번호 저장
+//     sessionStorage.setItem("stno", stno );
+//     // 2. 페이지 전환
+//     location.href="";
+// }

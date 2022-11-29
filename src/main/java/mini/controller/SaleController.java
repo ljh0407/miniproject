@@ -39,18 +39,14 @@ public class SaleController {
 
     // 등록
     @PostMapping("/setsale")
-    public int setsale(SaleDto saleDto){
+    public boolean setsale(@RequestBody SaleDto saleDto){
       return saleService.setSale(saleDto);
     }
 
     // 출력함
     @GetMapping("/getsale")
-    public List<SaleDto> salelist(@RequestBody SaleDto saleDto){
+    public List<SaleDto> salelist(){
       return saleService.salelist();
     }
-
-
-
-
 
  }

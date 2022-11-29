@@ -16,23 +16,17 @@ import java.util.List;
 public class SaleService {
 
     @Autowired
-    private SaleRepository saleRepository;
-    @Autowired
     private HttpServletRequest request;
     @Autowired
     private HttpServletRequest response;
     @Autowired
-    private StoreRepository storeRepository ;
-    @Autowired
-    private SaleService saleService ;
-    @Autowired
-    private SaleEntity saleEntity;
+    private SaleRepository saleRepository;
 
     //--------- 서비스
     @Transactional
-    public int setSale(SaleDto saleDto ){
+    public boolean setSale(SaleDto saleDto ){
         SaleEntity saleEntity = saleRepository.save(saleDto.toEntity());
-        return saleEntity.getSno();
+        return true;
     }
     // int sname
 
@@ -43,12 +37,8 @@ public class SaleService {
         for(SaleEntity  saleEntity: entityList ){
             list.add(saleEntity.toDto());
         }
+        System.out.println("list확인"+list);
         return list;
     }
-
-
-
-
-
 
 }

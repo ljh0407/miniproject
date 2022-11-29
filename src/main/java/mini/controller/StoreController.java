@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,10 +19,6 @@ public class StoreController {
     // 전역변수
     @Autowired
     private StoreService storeService;
-    @Autowired
-    private StoreDto storeDto;
-    @Autowired
-    private StoreEntity storeEntity ;
 
 
     // HTML 반환
@@ -33,10 +26,11 @@ public class StoreController {
     public Resource setstore(){
         return new ClassPathResource("view/index.html");
     }
-    //등록
 
+
+    //등록
     @PostMapping("/setstore")
-    public int setstore(StoreDto storeDto){
+    public boolean setstore(@RequestBody StoreDto storeDto){
         return storeService.setstore(storeDto);
     }
 
