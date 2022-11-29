@@ -10,6 +10,7 @@ import mini.domain.entity.SaleEntity;
 @Builder
 @ToString
 public class SaleDto {
+
     private int sno;
     private String sname;
     private int sprice;
