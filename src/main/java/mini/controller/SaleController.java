@@ -43,7 +43,7 @@ public class SaleController {
       return saleService.setSale(saleDto);
     }
 
-    // 출력
+    // 출력함
     @GetMapping("/getsale")
     public List<SaleDto> salelist(@RequestBody SaleDto saleDto){
       return saleService.salelist();

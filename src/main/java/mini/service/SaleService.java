@@ -36,7 +36,7 @@ public class SaleService {
     }
     // int sname
 
-    // 출력
+    // 출력함
     public List<SaleDto> salelist(){
         List<SaleEntity> entityList = saleRepository.findAll();
         List<SaleDto> list = new ArrayList<>();
